@@ -1,0 +1,6 @@
+String.prototype.padStart(maxLength, ?fillString);
+String.prototype.padEnd(maxLength, ?fillString);
+
+문자열의 좌, 우에 특정한 문자을 채우고자 할때 사용하는 함수, maxLength란 문자를 추가했을때 문자열의 최대길이이다.
+프로그래머스 풀이에서 보듯이, 정수값을 붙이고자 할때
+String(number).padStart(maxLength, '0')을 사용
