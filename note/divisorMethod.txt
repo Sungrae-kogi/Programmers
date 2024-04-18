@@ -1,0 +1,42 @@
+//코딩테스트문제들 풀이중 약수 관련내용이 좀 필요할정도로 자주나와 정리해두려고 한다.
+//조사한 방법은 3가지가 있는데.
+1. 단순하게 모든 수를 나눠서 약수판별하기
+function findDivisor(num) {
+    const divisor = [];
+    for(let i=1; i<=num; i++){
+        if(num % i === 0)
+            divisor.push(i);
+    }
+    return divisor;
+}
+
+but, 모든 수를 단순히 싹 돌면서 찾는다는점에서 효율이 좋지못하다.
+
+2. 주어진 수의 절반을 대상으로 확인하기.
+function findDivisor(num) {
+    const divisor = [];
+    for(let i=1; i<=num/2; i++){
+        if(num % i === 0)
+            divisor.push(i);
+    }
+    return divisor;
+}
+
+//약수는 본인을 제외하고 n/2보다 클 수없기때문에 그부분은 아예 대상에서 제외해버리는것이다, 단순하면서 효율이 좋다.
+
+3. 제곱근(Math.sqrt) 활용하기
+숫자 num의 약수는 한쌍의 짝으로 존재하기때문에, 쌍을 이루는 약수 중 하나만 찾으면 나머지는 찾지않아도 된다는점에서 기인.
+이해를 돕기위해
+ex) 10의 약수 [1,2,5,10] 에서 10의 제곱근 3.x는 정 중앙, 16의 약수 [1,2,4,8,16] 에서 16의 제곱근 4역시 정 중앙.
+이런 숨겨진 기믹이 있었다.
+단순히만 생각해봐도 범위를 반으로 줄여서 확인하는거보다 확실하게 탐색 시간이 줄어든다는 것을 직관적으로 확인이 가능하다.
+function findDivisor(num) {
+    const divisor = [];
+    for(let i=1; i<=parseInt(Math.sqrt(num)); i++){
+        if(num % i === 0){
+            divisor.push(i);
+            divisor.push(num / i);
+        }
+    }
+    return divisor;
+}
