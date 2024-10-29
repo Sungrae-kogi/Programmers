@@ -1,0 +1,13 @@
+@Secured(UserRole.Authority.ADMIN)   // 관리자 권한만 접근 가능
+@PatchMapping("/admin/user/{userId}")
+public ResponseEntity<ApiResponse<String>> changeUserRole(@PathVariable long userId, @RequestBody UserRoleChangeRequestDto userRoleChangeRequestDto) {
+    return ResponseEntity.ok(ApiResponse.success(userAdminService.changeUserRole(userId, userRoleChangeRequestDto)));
+}
+
+팀 코드를 이해하며 생긴 부분.
+@Secured 와 같은 Spring Security의 내용에 대해 모르기 때문에 찾아보면서 학습하고자한다.
+
+@Secured는 특정 메소드나 엔드포인트에 대해 접근할 수 있는 권한을 제한하기 위해 사용합니다.
+
+
+이 컨트롤러 메소드에서는 Spring Security가 접근하려는 사용자가 ADMIN권한을 보유했는지 확인하고, 아니라면 요청을 거부합니다.

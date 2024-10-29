@@ -1,0 +1,18 @@
+JwtUtil.java 파일에
+
+private final RedisTemplate<String, String> redisTemplate;
+
+이 부분이 선언되어있었다.
+
+이것은 Spring Boot에서 Redis 와 상호작용하기 위한 객체로. 이것이 JwtUtil에 있다는것은 JWT 토큰과 관련된 데이터를
+Redis에 저장하고 관리하기 위한것으로 주된 역할은 세션이나 인증 정보를 Redis에 빠르게 저장하고 불러오는것.
+
+Redis는 메모리 기반 NoSql DB 데이터를 빠르게 읽고 쓸 수 있어 인증 및 세션 정보 캐싱에 유용합니다.
+주로 유효기간이 있거나, 빠르게 접근해야 할 데이터를 저장할 때 사용.
+
+RedisTemplate는  redisTemplate.opsForValue() 같은 메소드로 데이터를 저장하거나 불러오는 작업을 간단하게 실행합니다.
+
+주 사용목적중 이 경우엔 리프레시 토큰 관리에 사용이되었습니다.
+
+만료기간이 짧은 Access Token과 달리 리프레시 토큰은 주로 Redis에 저장하고 만료되기 전까지 사용자의 재인증을 위해 활용할 수 있습니다.
+
