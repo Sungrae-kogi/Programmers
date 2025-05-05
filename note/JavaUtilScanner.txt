@@ -14,3 +14,22 @@ next()는 "Hello World" 입력시 "Hello"까지 읽음, nextLine()은 "Hello Wor
 int a = sc.nextInt();
 int b = sc.nextInt();
 이렇게 하면 3 5 입력시 a에는 3, b에는 5가 입력됩니다.
+
+** 주의 **
+next()와 nextLine()의 혼용 상황
+
+int n = sc.nextInt();           // 숫자를 입력받는다 단! 줄바꿈 ('\n')은 버리지 않음.
+String s = sc.nextLine();       // 바로 실해되면 빈 문자열을 읽어서 반환해버림
+
+해결방법
+
+int n = sc.nextInt();
+sc.nextLine(); // 버퍼 비우기용
+String s = sc.nextLine();
+
+**코딩테스트 팁
+
+// 여러 숫자가 한 줄에 공백으로 주어질 경우
+String[] input = sc.nextLine().split(" ");  // 문자열을 읽어서 " "공백기준으로 분리한 결과를 배열로 저장 -> 이거를 숫자타입으로 변경이 필요함.
+int a = Integer.parseInt(input[0]);
+int b = Integer.parseInt(input[1]);
