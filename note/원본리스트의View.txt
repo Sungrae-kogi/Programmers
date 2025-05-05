@@ -1,0 +1,24 @@
+Java에서 배열을 뒤집는 경우
+
+배열이 아닌 List<>를 사용해서 Collections.reverse()를 사용하는데 "리스트의 View"라는 개념이 존재한다.
+
+        List<Integer> baskets = new ArrayList<>();
+        for (int i = 1; i <= N; i++) {
+            baskets.add(i);
+        }
+
+        for (int i = 0; i < M; i++) {
+            int a = sc.nextInt(); // 시작 인덱스 (1-based)
+            int b = sc.nextInt(); // 끝 인덱스 (1-based)
+
+            // 부분 리스트를 만들어 reverse 적용
+            List<Integer> subList = baskets.subList(a - 1, b); // 0-based로 변경
+            Collections.reverse(subList);
+        }
+
+** 주요 포인트
+subList(fromIndex, toIndex)는 원본 리스트의 View 이므로 이후의 Collections.reverse(subList)를 사용하면 원본 리스트에도 
+반영이됩니다.
+그 이유는
+List.subList(fromIndex, toIndex)는 새로운 리스트를 복사해서 만드는 것이 아니라, 원본 리스트의 일부를 참조해서 조작할 수 있게 해주는 객체이기 때문.
+이 개념이 리스트의 View 라고 이해를하면된다.
